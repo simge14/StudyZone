@@ -1171,10 +1171,10 @@ a:hover { text-decoration: underline; }
 /* ════════════════════════════════════════════
    Splash Screen (Instagram-style initial load)
 ════════════════════════════════════════════ */
-/* Splash renders inside sz-app-shell (mobile frame) — not full-screen */
+/* Splash renders inside sz-app-shell — background matches the theme, no extra colour */
 .sz-splash {
-  flex: 1;                /* fills the app-shell flex column */
-  background: #FFFDD0;   /* cream */
+  flex: 1;
+  background: var(--sz-bg); /* matches app shell — no cream, no clash */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1186,10 +1186,11 @@ a:hover { text-decoration: underline; }
   pointer-events: none;
 }
 .sz-splash-logo-img {
-  height: 100px;
-  width: auto;
+  width: 68%;          /* impactful but not overflowing the mobile frame */
+  max-width: 280px;
+  height: auto;
   object-fit: contain;
-  animation: sz-scale-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: sz-scale-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ════════════════════════════════════════════
