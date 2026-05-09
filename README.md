@@ -1,70 +1,165 @@
-# Getting Started with Create React App
+# StudyZone — Peer-to-Peer Academic Skill Exchange Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> *"Birlikte Öğren, Birlikte Başar"* — Study Together, Succeed Together
 
-## Available Scripts
+StudyZone is a campus-exclusive peer learning ecosystem built for Işık University students. It eliminates the need for money or credits by enabling direct **skill barter** between students — teach what you know, learn what you need.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Vision
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Traditional academic help relies on paid tutors, generic online courses, or luck. StudyZone replaces this with a structured peer economy:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- A student who excels in Python but struggles with SQL finds a partner with the exact inverse profile.
+- They **barter** their expertise directly — no money, no intermediary.
+- Both level up. The campus ecosystem strengthens.
 
-### `npm test`
+This is not just a study app. It is an **academic social contract** built on trust, reciprocity, and community.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Core Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Feature | Description |
+|---|---|
+| **Skill Barter** | Post what you teach and what you want to learn. Match with peers directly. |
+| **Learnership** | Opt-in study buddy matching. The system pairs you with a compatible partner (BR-19: max 1 active match). |
+| **Pomodoro Timer** | Built-in 25/5 focus timer with daily goal tracking and Gem rewards. |
+| **Study Spots** | Curated list of Anadolu Yakası cafes, libraries and study centers with Wi-Fi & socket info. |
+| **Onboarding Guide** | 5-slide multilingual (TR/EN) carousel shown once on first login. |
+| **Dashboard** | Personalized home with Gem counter, active barter count, daily goal and quick tools. |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Tech Stack
 
-### `npm run eject`
+### Frontend
+| Technology | Version | Role |
+|---|---|---|
+| React | 19.x | UI framework |
+| React Router DOM | 7.x | Client-side routing |
+| react-i18next / i18next | 26.x | TR/EN multilingual support |
+| Axios | 1.x | HTTP client with JWT interceptors |
+| Custom CSS Design System | — | Navy (`#0A0075`) + Lavender (`#C4B3F5`) theme, glassmorphism, dark mode |
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Backend
+| Technology | Role |
+|---|---|
+| Node.js + Express | REST API server |
+| Microsoft SQL Server | Relational database |
+| msnodesqlv8 | Native SQL Server driver |
+| dotenv | Environment configuration |
+| CORS | Cross-origin request handling |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Infrastructure
+- **Auth**: JWT-based stateless authentication with localStorage persistence
+- **OTP**: Email verification on registration
+- **Proxy**: CRA dev proxy → `localhost:3000` (backend)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Legal Compliance — KVKK
 
-## Learn More
+StudyZone is designed with **KVKK (Kişisel Verilerin Korunması Kanunu)** compliance from the ground up:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Registration requires explicit **KVKK Clarification Text** acceptance before account creation.
+- Users give a separate **Açık Rıza (Explicit Consent)** for sharing profile data and academic skills with peers for Learnership/Barter matching.
+- Both consents are mandatory — the sign-up button remains disabled until both are checked.
+- Only `@isik.edu.tr` email addresses are accepted, limiting access to verified university members.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Getting Started
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Prerequisites
+- Node.js ≥ 18
+- Microsoft SQL Server (local or remote)
+- npm ≥ 9
 
-### Analyzing the Bundle Size
+### 1 — Database
+Import `StudyZoneDB.sql` into your SQL Server instance to create all tables and seed reference data.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 2 — Backend
+```bash
+cd StudyZone--Backend
+npm install
+```
 
-### Making a Progressive Web App
+Create a `.env` file in the backend directory:
+```env
+DB_SERVER=localhost
+DB_NAME=StudyZoneDB
+DB_USER=sa
+DB_PASSWORD=yourpassword
+JWT_SECRET=your_jwt_secret_key
+PORT=3000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+node index.js        # API starts on http://localhost:3000
+```
 
-### Advanced Configuration
+### 3 — Frontend
+```bash
+cd "studyzone react/studyzone-frontend"
+npm install
+npm start            # App starts on http://localhost:3001
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Open [http://localhost:3001](http://localhost:3001) in your browser.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Project Structure
 
-### `npm run build` fails to minify
+```
+studyzone-frontend/src/
+├── api/
+│   ├── axios.js            # Axios instance — JWT interceptor, online/offline events
+│   └── auth.js             # Multi-path auth helpers (register, login, OTP)
+├── components/
+│   ├── Home.js             # Dashboard (logged-in) + hero screen (logged-out)
+│   ├── Register.js         # Multi-step sign-up with KVKK consent checkboxes
+│   ├── Login.js
+│   ├── Profile.js
+│   ├── BarterDashboard.js
+│   ├── Learnership.js
+│   ├── Pomodoro.js
+│   ├── LocationGuide.js
+│   ├── OnboardingGuide.js  # First-login 5-slide bilingual carousel
+│   ├── Navbar.js           # Top header with SVG flag language switcher
+│   └── BottomNav.js
+├── context/
+│   ├── AuthContext.js      # JWT auth state — login, logout, updateUser
+│   └── ThemeContext.js     # Dark / light mode toggle
+├── hooks/
+│   └── useCourses.js       # Multi-endpoint course list fetcher with fallback
+├── i18n/
+│   ├── locales/tr.json
+│   └── locales/en.json
+├── data/
+│   └── courses.js          # Static interest area constants
+└── App.css                 # Centralized design system (~1 200 lines)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## Business Rules
+
+| Rule | Description |
+|---|---|
+| BR-01 | Only `@isik.edu.tr` emails accepted at registration |
+| BR-02 | Interests, goodAt and wantToLearn are required at sign-up |
+| BR-06 | Course list is sourced from the database, never hardcoded |
+| BR-17 | Learnership opt-in auto-enrolls the user in the matching pool |
+| BR-19 | Maximum 1 active Learnership match per user at a time |
+| BR-23 | Partner contact info is revealed only after match confirmation |
+| BR-31 | Study spots are limited to Anadolu Yakası, Istanbul |
+| BR-33 | No ratings or comments on study spot listings |
+
+---
+
+## License
+
+Developed as an academic capstone project at **Işık University**.  
+All rights reserved © 2025–2026 StudyZone Team.

@@ -73,7 +73,9 @@ export function useCourses() {
 
         /* Validate it's an array (or unwrappable object) before normalizing */
         if (!Array.isArray(raw) && (typeof raw !== 'object' || raw === null)) {
-          console.warn(`[useCourses] ${ep} returned unexpected type:`, typeof raw);
+          if (process.env.NODE_ENV === 'development') {
+            console.warn(`[useCourses] ${ep} returned unexpected type:`, typeof raw);
+          }
           continue;
         }
 
