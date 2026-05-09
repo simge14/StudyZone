@@ -31,6 +31,9 @@ export default function Pomodoro() {
     if (isWork) {
       setSessions((n) => n + 1);
       setFlash(t('pomodoro.complete'));
+      /* Save daily progress for Dashboard goal tracking */
+      const key = `sz_pomo_${new Date().toISOString().split('T')[0]}`;
+      localStorage.setItem(key, String((parseInt(localStorage.getItem(key) || '0', 10) + 1)));
     } else {
       setFlash(t('pomodoro.breakComplete'));
     }

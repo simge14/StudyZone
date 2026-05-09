@@ -16,12 +16,14 @@ const api = axios.create({
   timeout: 10000,
 });
 
+/* Attach JWT from localStorage to every outgoing request header */
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('sz_token');
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
+/* Broadcast online/offline status; auto-redirect on 401 (expired token) */
 api.interceptors.response.use(
   (res) => {
     window.dispatchEvent(new CustomEvent('sz-server-online'));
@@ -29,8 +31,10 @@ api.interceptors.response.use(
   },
   (err) => {
     if (!err.response) {
+      /* Network error — backend unreachable */
       window.dispatchEvent(new CustomEvent('sz-server-offline'));
     } else if (err.response.status === 401) {
+      /* Token expired or invalid — clear session and force re-login */
       localStorage.removeItem('sz_token');
       localStorage.removeItem('sz_user');
       window.location.href = '/login';

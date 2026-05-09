@@ -361,8 +361,15 @@ export default function Register() {
             {/* Password */}
             <div className="sz-form-group">
               <label className="sz-label">{t('register.password')}</label>
-              <input className="sz-input" type="password" placeholder={t('register.passwordPlaceholder')}
-                value={form.password} onChange={(e) => setField('password', e.target.value)} minLength={8} required />
+              <input className="sz-input" type="password"
+                placeholder={t('register.passwordPlaceholder')}
+                autoComplete="new-password"
+                value={form.password}
+                onChange={(e) => setField('password', e.target.value)}
+                minLength={8} required />
+              {form.password.length > 0 && form.password.length < 8 && (
+                <div className="sz-error">⚠ En az 8 karakter gereklidir ({form.password.length}/8)</div>
+              )}
             </div>
 
             {/* Confirm */}
@@ -371,6 +378,7 @@ export default function Register() {
               <input
                 className={`sz-input${touched.confirmPassword && !pwMatch ? ' is-invalid' : ''}`}
                 type="password" placeholder="••••••••"
+                autoComplete="new-password"
                 value={form.confirmPassword}
                 onChange={(e) => setField('confirmPassword', e.target.value)}
                 onBlur={() => touch('confirmPassword')}

@@ -13,6 +13,7 @@ import BarterDashboard from './components/BarterDashboard';
 import Pomodoro from './components/Pomodoro';
 import LocationGuide from './components/LocationGuide';
 import Learnership from './components/Learnership';
+import OnboardingGuide from './components/OnboardingGuide';
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
@@ -63,6 +64,8 @@ function AppShell() {
         </ErrorBoundary>
       </div>
       <BottomNav />
+      {/* First-login carousel guide — position:fixed, rendered above everything */}
+      <OnboardingGuide />
     </div>
   );
 }

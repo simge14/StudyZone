@@ -36,7 +36,20 @@
     "levelIntermediate": "Intermediate",
     "levelExpert": "Expert",
     "levelNone": "Complete Profile",
-    "noCoursesHint": "Go to profile to add courses"
+    "noCoursesHint": "Go to profile to add courses",
+    "dashGreeting": "Hello,",
+    "dashQuestion": "What do you want to achieve today?",
+    "dashGems": "Gems",
+    "dashActiveBarters": "Active Barters",
+    "dashQuickTools": "Quick Tools",
+    "dashPomodoro": "Pomodoro",
+    "dashPomodoroDesc": "Focus & produce",
+    "dashSpots": "Study Spots",
+    "dashSpotsDesc": "Find the best spots",
+    "dashDailyGoal": "Daily Goal",
+    "dashGoalText": "Complete {{count}} Pomodoros today",
+    "dashGoalCompleted": "Goal achieved! 🎉",
+    "dashGemsBonus": "You earned +5 Gems!"
   },
   "register": {
     "title": "Create Account",

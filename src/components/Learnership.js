@@ -162,7 +162,7 @@ function PartnerCard({ data }) {
     <div style={{ background: 'var(--sz-card)', border: '1px solid var(--sz-border)', borderRadius: 'var(--sz-radius)', overflow: 'hidden', marginBottom: '1rem', boxShadow: 'var(--sz-shadow-md)' }}>
       {/* Gradient header */}
       <div style={{
-        background: 'linear-gradient(135deg, var(--sz-primary) 0%, #5C3FE8 100%)',
+        background: 'linear-gradient(135deg, var(--sz-primary) 0%, var(--sz-accent) 100%)',
         padding: '1.25rem 1.25rem 2.5rem', position: 'relative',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
@@ -322,7 +322,7 @@ export default function Learnership() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1.5rem' }}>
           <div style={{
             width: 46, height: 46, borderRadius: '50%',
-            background: 'linear-gradient(135deg, var(--sz-primary), #5C3FE8)',
+            background: 'linear-gradient(135deg, var(--sz-primary), var(--sz-accent))',
             display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
             boxShadow: '0 4px 12px rgba(var(--sz-primary-rgb),0.3)',
           }}>

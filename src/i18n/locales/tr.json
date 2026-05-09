@@ -36,7 +36,20 @@
     "levelIntermediate": "Orta",
     "levelExpert": "Uzman",
     "levelNone": "Profili Tamamla",
-    "noCoursesHint": "Ders eklemek için profil sayfasına git"
+    "noCoursesHint": "Ders eklemek için profil sayfasına git",
+    "dashGreeting": "Merhaba,",
+    "dashQuestion": "Bugün neyi başarmak istersin?",
+    "dashGems": "Gems",
+    "dashActiveBarters": "Aktif Barter",
+    "dashQuickTools": "Hızlı Araçlar",
+    "dashPomodoro": "Pomodoro",
+    "dashPomodoroDesc": "Odaklan ve üret",
+    "dashSpots": "Çalışma Alanları",
+    "dashSpotsDesc": "En iyi noktaları bul",
+    "dashDailyGoal": "Günün Hedefi",
+    "dashGoalText": "Bugün {{count}} Pomodoro tamamla",
+    "dashGoalCompleted": "Hedefe ulaştın! 🎉",
+    "dashGemsBonus": "+5 Gem kazandın!"
   },
   "register": {
     "title": "Hesap Oluştur",

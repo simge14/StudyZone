@@ -4,6 +4,29 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 
+const TRFlag = () => (
+  <svg width="16" height="11" viewBox="0 0 16 11" style={{ display: 'inline-block', verticalAlign: 'middle', borderRadius: 2, flexShrink: 0 }}>
+    <rect width="16" height="11" fill="#E30A17"/>
+    <circle cx="6.2" cy="5.5" r="2.5" fill="white"/>
+    <circle cx="7.2" cy="5.5" r="2" fill="#E30A17"/>
+    <polygon fill="white" points="9.8,5.5 10.5,4.4 10.8,5.7 12,5.1 11.3,6.2 12.3,6.6 11,6.7 11.2,8 10.3,7.1 9.5,7.9 9.8,6.7 8.7,6.5"/>
+  </svg>
+);
+
+const GBFlag = () => (
+  <svg width="16" height="11" viewBox="0 0 16 11" style={{ display: 'inline-block', verticalAlign: 'middle', borderRadius: 2, flexShrink: 0 }}>
+    <rect width="16" height="11" fill="#012169"/>
+    <line x1="0" y1="0" x2="16" y2="11" stroke="white" strokeWidth="2.2"/>
+    <line x1="16" y1="0" x2="0" y2="11" stroke="white" strokeWidth="2.2"/>
+    <line x1="0" y1="0" x2="16" y2="11" stroke="#C8102E" strokeWidth="1.2"/>
+    <line x1="16" y1="0" x2="0" y2="11" stroke="#C8102E" strokeWidth="1.2"/>
+    <rect x="6.5" y="0" width="3" height="11" fill="white"/>
+    <rect x="0" y="4" width="16" height="3" fill="white"/>
+    <rect x="7.2" y="0" width="1.6" height="11" fill="#C8102E"/>
+    <rect x="0" y="4.7" width="16" height="1.6" fill="#C8102E"/>
+  </svg>
+);
+
 /* Minimal sticky top header */
 export default function TopHeader() {
   const { isDark, toggleTheme }    = useTheme();
@@ -34,7 +57,7 @@ export default function TopHeader() {
           {/* Language toggle pill */}
           <button className="sz-icon-btn" onClick={switchLang}
             title="Switch language" aria-label="Switch language">
-            <span style={{ fontSize: '0.72rem' }}>{isEN ? '🇬🇧' : '🇹🇷'}</span>
+            {isEN ? <GBFlag /> : <TRFlag />}
             <span>{isEN ? 'EN' : 'TR'}</span>
           </button>
 

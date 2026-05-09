@@ -13,10 +13,15 @@ export default function LocationGuide() {
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [offline, setOffline] = useState(false);
+  const [error, setError] = useState('');
+  const [retryKey, setRetryKey] = useState(0);
   const [district, setDistrict] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
 
   useEffect(() => {
+    setLoading(true);
+    setError('');
+    setOffline(false);
     api.get('/api/locations')
       .then(({ data }) => {
         /* BR-31: Keep only Anadolu Yakası entries — filter by region field or known districts */
@@ -34,9 +39,10 @@ export default function LocationGuide() {
       })
       .catch((err) => {
         if (!err.response) setOffline(true);
+        else setError(err.response?.data?.message || 'Konumlar yüklenemedi. Lütfen tekrar deneyin.');
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [retryKey]);
 
   const districts = [...new Set(locations.map((l) => l.district).filter(Boolean))].sort();
   const types = [...new Set(locations.map((l) => l.type).filter(Boolean))];
@@ -45,20 +51,26 @@ export default function LocationGuide() {
     (l) => (!district || l.district === district) && (!typeFilter || l.type === typeFilter)
   );
 
-  /* Offline state */
-  if (offline) {
+  /* Full-page offline / error states */
+  if (offline || error) {
+    const isOffline = offline;
     return (
       <div className="sz-page" style={{ textAlign: 'center', paddingTop: '3rem' }}>
-        <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🔌</div>
-        <h2 style={{ marginBottom: '0.5rem' }}>Sunucu Kapalı</h2>
-        <p style={{ color: 'var(--sz-muted)', fontSize: '0.9rem' }}>
-          Çalışma alanlarını yüklemek için lütfen backend sunucunuzu başlatın.<br />
-          <code style={{ background: 'var(--sz-border)', padding: '0.1rem 0.4rem', borderRadius: 4 }}>
-            localhost:3000
-          </code>
+        <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{isOffline ? '🔌' : '⚠️'}</div>
+        <h2 style={{ marginBottom: '0.5rem', fontSize: '1.15rem' }}>
+          {isOffline ? 'Sunucu Kapalı' : 'Yüklenemedi'}
+        </h2>
+        <p style={{ color: 'var(--sz-muted)', fontSize: '0.88rem', lineHeight: 1.6, maxWidth: 280, margin: '0 auto' }}>
+          {isOffline
+            ? <>Çalışma alanlarını yüklemek için backend sunucunuzu başlatın.<br />
+                <code style={{ background: 'var(--sz-border)', padding: '0.1rem 0.4rem', borderRadius: 4, fontSize: '0.8rem' }}>
+                  localhost:3000
+                </code>
+              </>
+            : error}
         </p>
         <button className="btn-sz-outline" style={{ marginTop: '1.5rem' }}
-          onClick={() => { setOffline(false); setLoading(true); window.location.reload(); }}>
+          onClick={() => setRetryKey((k) => k + 1)}>
           Tekrar Dene
         </button>
       </div>
