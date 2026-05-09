@@ -134,20 +134,26 @@ a:hover { text-decoration: underline; }
   width: auto;
   object-fit: contain;
   display: block;
+  /* multiply: beyaz arka plan açık yüzeyde eriyip kaybolur */
+  mix-blend-mode: multiply;
+  transition: filter var(--sz-transition);
+}
+/* Dark mode: multiply sıfırla, logoyu beyaza çevir */
+[data-theme='dark'] .sz-brand-logo {
+  mix-blend-mode: normal;
+  filter: brightness(0) invert(1);
 }
 
 .sz-brand-wordmark {
   font-size: 1.1rem;
   font-weight: 900;
   letter-spacing: -0.06em;
-  color: var(--sz-primary);
+  color: var(--sz-primary); /* light=navy, dark=lavender — otomatik */
   line-height: 1;
 }
+/* S ve Z: accent rengi — dark mode'da var(--sz-accent) lavantaya kayar */
 .sz-brand-s,
 .sz-brand-z { color: var(--sz-accent); }
-[data-theme='dark'] .sz-brand-wordmark { color: var(--sz-primary); }
-/* Dark mode: logo → beyaz (herhangi logo rengi üzerinde çalışır) */
-[data-theme='dark'] .sz-brand-logo { filter: brightness(0) invert(1); }
 
 /* Onboarding guide — logo on first slide (inverted for dark card background) */
 .sz-guide-logo-img {
@@ -1186,11 +1192,16 @@ a:hover { text-decoration: underline; }
   pointer-events: none;
 }
 .sz-splash-logo-img {
-  width: 68%;          /* impactful but not overflowing the mobile frame */
+  width: 68%;
   max-width: 280px;
   height: auto;
   object-fit: contain;
+  mix-blend-mode: multiply; /* beyaz bg light temada kaybolur */
   animation: sz-scale-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+[data-theme='dark'] .sz-splash-logo-img {
+  mix-blend-mode: normal;
+  filter: brightness(0) invert(1);
 }
 
 /* ════════════════════════════════════════════
