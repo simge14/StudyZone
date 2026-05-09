@@ -81,7 +81,11 @@
     "resend": "Resend Code",
     "selectCourses": "Select courses...",
     "searchCourses": "Search courses...",
-    "selected": "selected"
+    "selected": "selected",
+    "kvkkLabel": "I have read and accept the KVKK Clarification Text regarding the processing of my personal data.",
+    "consentLabel": "I give my explicit consent for my profile information and academic skills to be shared with other users for Learnership/Barter purposes.",
+    "kvkkRequired": "You must read and accept the KVKK Clarification Text.",
+    "consentRequired": "You must give your explicit consent to proceed."
   },
   "login": {
     "title": "Sign In",

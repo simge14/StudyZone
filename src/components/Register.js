@@ -221,6 +221,8 @@ export default function Register() {
   const [toast, setToast] = useState(null);      /* { type, message } */
   const [loading, setLoading] = useState(false);
   const [showOTP, setShowOTP] = useState(false);
+  const [kvkk, setKvkk]       = useState(false); /* KVKK consent */
+  const [consent, setConsent] = useState(false); /* explicit data-sharing consent */
   const [devOtp, setDevOtp] = useState('');      /* backend returns in dev mode */
   const [otpError, setOtpError] = useState('');
   const [otpLoading, setOtpLoading] = useState(false);
@@ -260,6 +262,8 @@ export default function Register() {
     if (!goodAtOk)          { showError('İyi olduğunuz en az bir ders seçiniz.'); return; }
     if (!wantOk)            { showError('Öğrenmek istediğiniz en az bir ders seçiniz.'); return; }
     if (!learnOk)           { showError('Learnership tercihini seçiniz.'); return; }
+    if (!kvkk)    { showError(t('register.kvkkRequired'));    return; }
+    if (!consent) { showError(t('register.consentRequired')); return; }
 
     setLoading(true);
     try {
@@ -423,8 +427,40 @@ export default function Register() {
               {touched.learnership && !learnOk && <div className="sz-error">⚠ Seçim yapınız</div>}
             </div>
 
-            <button className="btn-sz-primary btn-full" type="submit" disabled={loading}
-              style={{ marginTop: '0.5rem' }}>
+            {/* ── Legal consent checkboxes ── */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', margin: '1.1rem 0 0.85rem' }}>
+              {/* KVKK */}
+              <label className={`sz-consent-row${kvkk ? ' checked' : ''}`}>
+                <input type="checkbox" checked={kvkk} onChange={(e) => setKvkk(e.target.checked)} />
+                <span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                    style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4, flexShrink: 0 }}>
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                  {t('register.kvkkLabel')}
+                </span>
+              </label>
+
+              {/* Açık Rıza */}
+              <label className={`sz-consent-row${consent ? ' checked' : ''}`}>
+                <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
+                <span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                    style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4, flexShrink: 0 }}>
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                  {t('register.consentLabel')}
+                </span>
+              </label>
+            </div>
+
+            <button className="btn-sz-primary btn-full" type="submit"
+              disabled={loading || !kvkk || !consent}
+              style={{ marginTop: '0.25rem' }}>
               {loading ? t('common.loading') : t('register.submit')}
             </button>
           </form>

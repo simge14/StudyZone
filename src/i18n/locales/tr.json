@@ -81,7 +81,11 @@
     "resend": "Kodu Yeniden Gönder",
     "selectCourses": "Ders seçin...",
     "searchCourses": "Ders ara...",
-    "selected": "seçildi"
+    "selected": "seçildi",
+    "kvkkLabel": "Kişisel verilerimin işlenmesine yönelik KVKK Aydınlatma Metni'ni okudum ve kabul ediyorum.",
+    "consentLabel": "Profil bilgilerimin ve akademik yetkinliklerimin Learnership/Barter amacıyla diğer kullanıcılarla paylaşılmasına açık rıza veriyorum.",
+    "kvkkRequired": "KVKK metnini okuyup kabul etmeniz gerekmektedir.",
+    "consentRequired": "Açık rıza onayı vermeniz gerekmektedir."
   },
   "login": {
     "title": "Giriş Yap",
