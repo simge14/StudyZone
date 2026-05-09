@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
+import StudyZoneLogo from '../assets/StudyZone.png';
 
 const GUIDE_KEY = 'sz_guide_seen';
 
@@ -117,7 +118,10 @@ export default function OnboardingGuide() {
 
         {/* Slide content — key on slide+lang forces re-animation on both changes */}
         <div key={`${slide}-${dir}-${isEN ? 'en' : 'tr'}`} className={`sz-guide-slide sz-guide-slide-${dir}`}>
-          <div className="sz-guide-emoji" aria-hidden="true">{emoji}</div>
+          {slide === 0
+            ? <img src={StudyZoneLogo} alt="StudyZone" className="sz-guide-logo-img" />
+            : <div className="sz-guide-emoji" aria-hidden="true">{emoji}</div>
+          }
           <h2 className="sz-guide-title">{title}</h2>
           <p className="sz-guide-body">{body}</p>
         </div>

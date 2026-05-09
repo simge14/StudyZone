@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
+import StudyZoneLogo from '../assets/StudyZone.png';
 
 const TRFlag = () => (
   <svg width="16" height="11" viewBox="0 0 16 11" style={{ display: 'inline-block', verticalAlign: 'middle', borderRadius: 2, flexShrink: 0 }}>
@@ -50,7 +51,7 @@ export default function TopHeader() {
       <header className="sz-top-header">
         {/* Logo */}
         <Link to="/" className="sz-top-brand" aria-label="StudyZone Home">
-          <span className="sz-brand-s">S</span>tudy<span className="sz-brand-z">Z</span>one
+          <img src={StudyZoneLogo} alt="StudyZone" className="sz-brand-logo" />
         </Link>
 
         <div className="sz-top-controls">
