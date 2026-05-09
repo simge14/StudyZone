@@ -51,7 +51,10 @@ export default function TopHeader() {
       <header className="sz-top-header">
         {/* Logo */}
         <Link to="/" className="sz-top-brand" aria-label="StudyZone Home">
-          <img src={StudyZoneLogo} alt="" className="sz-brand-logo" aria-hidden="true" />
+          {/* Wrapper pill — logoyu her iki temada görünür yapar */}
+          <span className="sz-brand-logo-wrap">
+            <img src={StudyZoneLogo} alt="" className="sz-brand-logo" aria-hidden="true" />
+          </span>
           <span className="sz-brand-wordmark">
             <span className="sz-brand-s">S</span>tudy<span className="sz-brand-z">Z</span>one
           </span>

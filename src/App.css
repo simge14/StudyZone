@@ -129,17 +129,29 @@ a:hover { text-decoration: underline; }
 }
 .sz-top-brand:hover { text-decoration: none; opacity: 0.82; }
 
+/* Logo icon container — mix-blend-mode yerine colored wrapper kullanılıyor
+   (backdrop-filter olan Navbar'da mix-blend-mode güvenilmez) */
+.sz-brand-logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 0, 117, 0.10);   /* light: hafif lacivert */
+  border-radius: 7px;
+  padding: 4px 5px;
+  flex-shrink: 0;
+}
+[data-theme='dark'] .sz-brand-logo-wrap {
+  background: rgba(196, 179, 245, 0.18); /* dark: hafif lavanta */
+}
+
 .sz-brand-logo {
-  height: 26px;
+  height: 22px;
   width: auto;
   object-fit: contain;
   display: block;
-  /* Light mode: PNG beyaz bg, açık navbar yüzeyinde belli belirsiz —
-     mix-blend-mode kaldırıldı: backdrop-filter ile çakışıyor */
 }
 [data-theme='dark'] .sz-brand-logo {
-  /* Dark: logo tamamen beyaz yapılır — dark navbar'da net görünür */
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1); /* dark: logo → beyaz */
 }
 
 .sz-brand-wordmark {
@@ -1175,14 +1187,15 @@ a:hover { text-decoration: underline; }
    Splash Screen — mobil çerçeve içinde, taşmaz
 ════════════════════════════════════════════ */
 .sz-splash {
-  /* position:absolute → sz-app-shell'i tam kaplıyor, dışarıya sızmıyor */
   position: absolute;
   inset: 0;
   z-index: 10;
-  background: #0f172a;
+  background: #0f172a;  /* lacivert — her iki temada da aynı */
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
   transition: opacity 0.5s ease;
   animation: sz-fade-in 0.3s ease;
 }
@@ -1190,12 +1203,13 @@ a:hover { text-decoration: underline; }
   opacity: 0;
   pointer-events: none;
 }
+/* Logo: dark arka plan üstünde her zaman beyaz */
 .sz-splash-logo-img {
-  width: 68%;
-  max-width: 280px;
+  width: 62%;
+  max-width: 260px;
   height: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* dark bg → logo her zaman beyaz */
+  filter: brightness(0) invert(1);
   animation: sz-scale-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
