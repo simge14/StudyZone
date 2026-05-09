@@ -47,33 +47,34 @@ function ServerBanner() {
 function AppShell() {
   const [splashDone, setSplashDone] = useState(false);
 
-  /* Render the splash screen until it calls onDone() */
-  if (!splashDone) {
-    return <SplashScreen onDone={() => setSplashDone(true)} />;
-  }
-
   return (
     <div className="sz-app-shell">
-      <TopHeader />
-      <ServerBanner />
-      <div className="sz-scroll-area">
-        <ErrorBoundary>
-          <Routes>
-            <Route path="/"          element={<Home />} />
-            <Route path="/login"     element={<Login />} />
-            <Route path="/register"  element={<Register />} />
-            <Route path="/locations" element={<LocationGuide />} />
-            <Route path="/profile"      element={<PrivateRoute><Profile /></PrivateRoute>} />
-            <Route path="/barter"       element={<PrivateRoute><BarterDashboard /></PrivateRoute>} />
-            <Route path="/learnership"  element={<PrivateRoute><Learnership /></PrivateRoute>} />
-            <Route path="/pomodoro"     element={<PrivateRoute><Pomodoro /></PrivateRoute>} />
-            <Route path="*"          element={<Navigate to="/" replace />} />
-          </Routes>
-        </ErrorBoundary>
-      </div>
-      <BottomNav />
-      {/* First-login carousel guide — position:fixed, rendered above everything */}
-      <OnboardingGuide />
+      {/* Splash renders inside the mobile frame — not full-screen */}
+      {!splashDone ? (
+        <SplashScreen onDone={() => setSplashDone(true)} />
+      ) : (
+        <>
+          <TopHeader />
+          <ServerBanner />
+          <div className="sz-scroll-area">
+            <ErrorBoundary>
+              <Routes>
+                <Route path="/"          element={<Home />} />
+                <Route path="/login"     element={<Login />} />
+                <Route path="/register"  element={<Register />} />
+                <Route path="/locations" element={<LocationGuide />} />
+                <Route path="/profile"      element={<PrivateRoute><Profile /></PrivateRoute>} />
+                <Route path="/barter"       element={<PrivateRoute><BarterDashboard /></PrivateRoute>} />
+                <Route path="/learnership"  element={<PrivateRoute><Learnership /></PrivateRoute>} />
+                <Route path="/pomodoro"     element={<PrivateRoute><Pomodoro /></PrivateRoute>} />
+                <Route path="*"          element={<Navigate to="/" replace />} />
+              </Routes>
+            </ErrorBoundary>
+          </div>
+          <BottomNav />
+          <OnboardingGuide />
+        </>
+      )}
     </div>
   );
 }

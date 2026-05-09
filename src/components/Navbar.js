@@ -51,7 +51,10 @@ export default function TopHeader() {
       <header className="sz-top-header">
         {/* Logo */}
         <Link to="/" className="sz-top-brand" aria-label="StudyZone Home">
-          <img src={StudyZoneLogo} alt="StudyZone" className="sz-brand-logo" />
+          <img src={StudyZoneLogo} alt="" className="sz-brand-logo" aria-hidden="true" />
+          <span className="sz-brand-wordmark">
+            <span className="sz-brand-s">S</span>tudy<span className="sz-brand-z">Z</span>one
+          </span>
         </Link>
 
         <div className="sz-top-controls">

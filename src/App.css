@@ -118,10 +118,11 @@ a:hover { text-decoration: underline; }
   transition: background var(--sz-transition);
 }
 
-/* ── StudyZone Logo ── */
+/* ── StudyZone Logo + Wordmark (Navbar) ── */
 .sz-top-brand {
   display: flex;
   align-items: center;
+  gap: 0.35rem;
   text-decoration: none;
   user-select: none;
   flex-shrink: 0;
@@ -129,11 +130,22 @@ a:hover { text-decoration: underline; }
 .sz-top-brand:hover { text-decoration: none; opacity: 0.82; }
 
 .sz-brand-logo {
-  height: 30px;
+  height: 26px;
   width: auto;
   object-fit: contain;
   display: block;
 }
+
+.sz-brand-wordmark {
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  color: var(--sz-primary);
+  line-height: 1;
+}
+.sz-brand-s,
+.sz-brand-z { color: var(--sz-accent); }
+[data-theme='dark'] .sz-brand-wordmark { color: var(--sz-primary); }
 
 /* Onboarding guide — logo on first slide (inverted for dark card background) */
 .sz-guide-logo-img {
@@ -1157,24 +1169,22 @@ a:hover { text-decoration: underline; }
 /* ════════════════════════════════════════════
    Splash Screen (Instagram-style initial load)
 ════════════════════════════════════════════ */
+/* Splash renders inside sz-app-shell (mobile frame) — not full-screen */
 .sz-splash {
-  position: fixed;
-  inset: 0;
-  background: #FFFDD0; /* cream */
+  flex: 1;                /* fills the app-shell flex column */
+  background: #FFFDD0;   /* cream */
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 99999;
-  overflow: hidden;
-  animation: sz-fade-in 0.35s ease;
   transition: opacity 0.5s ease;
+  animation: sz-fade-in 0.3s ease;
 }
 .sz-splash-exit {
   opacity: 0;
   pointer-events: none;
 }
 .sz-splash-logo-img {
-  height: 90px;
+  height: 100px;
   width: auto;
   object-fit: contain;
   animation: sz-scale-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
