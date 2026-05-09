@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import StudyZoneLogo from '../assets/StudyZone.png';
 
-/* Cream (#FFFDD0) splash — 2.1 s total, fade-out starts at 1.6 s */
+/* Logo public/ klasöründen sunuluyor — import hatası riski sıfır */
+const LOGO_SRC = process.env.PUBLIC_URL + '/StudyZone.png';
+
 export default function SplashScreen({ onDone }) {
   const [exiting, setExiting] = useState(false);
 
@@ -12,8 +13,13 @@ export default function SplashScreen({ onDone }) {
   }, [onDone]);
 
   return (
-    <div className={`sz-splash${exiting ? ' sz-splash-exit' : ''}`} aria-label="StudyZone yükleniyor">
-      <img src={StudyZoneLogo} alt="StudyZone" className="sz-splash-logo-img" />
+    <div className={`sz-splash${exiting ? ' sz-splash-exit' : ''}`}
+      aria-label="StudyZone yükleniyor">
+      <img
+        src={LOGO_SRC}
+        alt="StudyZone"
+        style={{ width: 'auto', height: '40px', maxWidth: '62%', filter: 'brightness(0) invert(1)' }}
+      />
     </div>
   );
 }

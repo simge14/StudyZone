@@ -94,7 +94,8 @@ a:hover { text-decoration: underline; }
   margin: 0 auto;
   min-height: 100vh;
   background: var(--sz-bg);
-  position: relative;
+  position: relative;   /* splash position:absolute buna göre konumlanır */
+  overflow: hidden;     /* hiçbir renk/içerik bu kutunun dışına taşmaz   */
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 0 1px rgba(10,0,117,0.06), var(--sz-shadow-lg);
