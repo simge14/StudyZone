@@ -134,12 +134,11 @@ a:hover { text-decoration: underline; }
   width: auto;
   object-fit: contain;
   display: block;
-  /* Light: multiply → PNG'nin beyaz bg açık navbar yüzeyinde kaybolur */
-  mix-blend-mode: multiply;
+  /* Light mode: PNG beyaz bg, açık navbar yüzeyinde belli belirsiz —
+     mix-blend-mode kaldırıldı: backdrop-filter ile çakışıyor */
 }
 [data-theme='dark'] .sz-brand-logo {
-  /* Dark: multiply kapatılır, logo tamamen beyaza çevrilir */
-  mix-blend-mode: normal;
+  /* Dark: logo tamamen beyaz yapılır — dark navbar'da net görünür */
   filter: brightness(0) invert(1);
 }
 
@@ -1173,11 +1172,14 @@ a:hover { text-decoration: underline; }
 }
 
 /* ════════════════════════════════════════════
-   Splash Screen
+   Splash Screen — mobil çerçeve içinde, taşmaz
 ════════════════════════════════════════════ */
 .sz-splash {
-  flex: 1;
-  background: #0f172a; /* sabit lacivert — temadan bağımsız */
+  /* position:absolute → sz-app-shell'i tam kaplıyor, dışarıya sızmıyor */
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: #0f172a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1188,13 +1190,12 @@ a:hover { text-decoration: underline; }
   opacity: 0;
   pointer-events: none;
 }
-/* Logo her zaman dark bg üstünde → her zaman beyaz */
 .sz-splash-logo-img {
   width: 68%;
   max-width: 280px;
   height: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1); /* dark bg → logo her zaman beyaz */
   animation: sz-scale-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
