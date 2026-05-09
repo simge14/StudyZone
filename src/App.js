@@ -14,6 +14,7 @@ import Pomodoro from './components/Pomodoro';
 import LocationGuide from './components/LocationGuide';
 import Learnership from './components/Learnership';
 import OnboardingGuide from './components/OnboardingGuide';
+import SplashScreen    from './components/SplashScreen';
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
@@ -44,6 +45,13 @@ function ServerBanner() {
 }
 
 function AppShell() {
+  const [splashDone, setSplashDone] = useState(false);
+
+  /* Render the splash screen until it calls onDone() */
+  if (!splashDone) {
+    return <SplashScreen onDone={() => setSplashDone(true)} />;
+  }
+
   return (
     <div className="sz-app-shell">
       <TopHeader />
