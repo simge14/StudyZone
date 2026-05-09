@@ -146,6 +146,8 @@ a:hover { text-decoration: underline; }
 .sz-brand-s,
 .sz-brand-z { color: var(--sz-accent); }
 [data-theme='dark'] .sz-brand-wordmark { color: var(--sz-primary); }
+/* Dark mode: logo → beyaz (herhangi logo rengi üzerinde çalışır) */
+[data-theme='dark'] .sz-brand-logo { filter: brightness(0) invert(1); }
 
 /* Onboarding guide — logo on first slide (inverted for dark card background) */
 .sz-guide-logo-img {
