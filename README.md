@@ -38,9 +38,10 @@ This is not just a study app. It is an **academic social contract** built on tru
 |---|---|---|
 | React | 19.x | UI framework |
 | React Router DOM | 7.x | Client-side routing |
+| Framer Motion | 12.x | Page transitions (AnimatePresence fade) and micro-interactions |
 | react-i18next / i18next | 26.x | TR/EN multilingual support |
 | Axios | 1.x | HTTP client with JWT interceptors |
-| Custom CSS Design System | — | Navy (`#0A0075`) + Lavender (`#C4B3F5`) theme, glassmorphism, dark mode |
+| Custom CSS Design System | — | Navy (`#0A0075`) + Lavender (`#C4B3F5`) + Cream (`#F5F5EB`) theme, glassmorphism, dark mode |
 
 ### Backend
 | Technology | Role |
@@ -127,8 +128,11 @@ studyzone-frontend/src/
 │   ├── Pomodoro.js
 │   ├── LocationGuide.js
 │   ├── OnboardingGuide.js  # First-login 5-slide bilingual carousel
+│   ├── SplashScreen.js     # 2.1 s animated logo splash on cold start
 │   ├── Navbar.js           # Top header with SVG flag language switcher
-│   └── BottomNav.js
+│   ├── BottomNav.js
+│   ├── Toast.js            # Slide-up notification toast
+│   └── ErrorBoundary.js    # React error boundary wrapper
 ├── context/
 │   ├── AuthContext.js      # JWT auth state — login, logout, updateUser
 │   └── ThemeContext.js     # Dark / light mode toggle
@@ -138,7 +142,8 @@ studyzone-frontend/src/
 │   ├── locales/tr.json
 │   └── locales/en.json
 ├── data/
-│   └── courses.js          # Static interest area constants
+│   ├── courses.js          # Static interest area constants
+│   └── locations.js        # Static fallback study spot data
 └── App.css                 # Centralized design system (~1 200 lines)
 ```
 
@@ -150,7 +155,13 @@ studyzone-frontend/src/
 |---|---|
 | BR-01 | Only `@isik.edu.tr` emails accepted at registration |
 | BR-02 | Interests, goodAt and wantToLearn are required at sign-up |
+| BR-04 | Learnership preference (yes/no) is mandatory during registration |
 | BR-06 | Course list is sourced from the database, never hardcoded |
+| BR-07 | Barter course selection is restricted to the user's own profile courses |
+| BR-08 | No money, credits or payment of any kind in barter exchanges |
+| BR-12 | Maximum 3 active barters per user at a time |
+| BR-14 | The same course cannot be both taught and requested in a single barter |
+| BR-16 | Completed barters can be rated with a 1–5 star system |
 | BR-17 | Learnership opt-in auto-enrolls the user in the matching pool |
 | BR-19 | Maximum 1 active Learnership match per user at a time |
 | BR-23 | Partner contact info is revealed only after match confirmation |
