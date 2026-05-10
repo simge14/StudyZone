@@ -1,17 +1,16 @@
 /* ═══════════════════════════════════════════════════════════
-   StudyZone Design System v2
-   Primary   #0A0075  Deep Navy
-   Secondary #C4B3F5  Soft Lavender
-   BG        #F5F5EB  Off-White
+   StudyZone Design System — Sabit Renk Paleti
+   Vurgu (Lavanta):      #C4B3F5
+   Ana Koyu (Lacivert):  #0A0075
+   Ana Açık (Krem):      #F5F5EB  ← Splash ve light bg için
 ═══════════════════════════════════════════════════════════ */
 
 /* ── Light tokens ── */
 :root {
   --sz-bg:          #F5F5EB;
-  --sz-bg-desktop:  #EBEBDF;
   --sz-card:        #FFFFFF;
   --sz-card-alt:    #F8F8F2;
-  --sz-text:        #080014;
+  --sz-text:        #1e293b;              /* sabitlendi */
   --sz-muted:       #6B6B8A;
   --sz-border:      rgba(10, 0, 117, 0.1);
   --sz-nav-bg:      rgba(245,245,235,0.92);
@@ -19,12 +18,16 @@
 
   --sz-primary:     #0A0075;
   --sz-primary-h:   #08005E;
-  --sz-primary-rgb: 10, 0, 117;        /* use in rgba(var(--sz-primary-rgb), α) */
-  --sz-secondary:   #C4B3F5;
+  --sz-primary-rgb: 10, 0, 117;
+  --sz-secondary:   #C4B3F5;             /* lavanta — sabit */
   --sz-secondary-h: #B0A0F0;
-  --sz-secondary-rgb: 196, 179, 245;   /* lavender — rgba(var(--sz-secondary-rgb), α) */
-  --sz-accent:      #5C3FE8;           /* mid-point for interactive states */
-  --sz-accent-rgb:  92, 63, 232;       /* rgba(var(--sz-accent-rgb), α) */
+  --sz-secondary-rgb: 196, 179, 245;
+  --sz-accent:      #5C3FE8;
+  --sz-accent-rgb:  92, 63, 232;
+
+  /* Splash renkleri */
+  --sz-splash-dark: #0f172a;             /* lacivert splash bg */
+  --sz-cream:       #FFFDD0;             /* krem (gerekirse) */
 
   --sz-shadow:    0 2px 12px rgba(10,0,117,0.08), 0 1px 3px rgba(10,0,117,0.04);
   --sz-shadow-md: 0 4px 20px rgba(10,0,117,0.12), 0 2px 6px rgba(10,0,117,0.06);
@@ -42,18 +45,16 @@
 
 /* ── Dark tokens ── */
 [data-theme='dark'] {
-  --sz-bg:          #030022;
-  --sz-bg-desktop:  #010015;
-  --sz-card:        #0A0050;
-  --sz-card-alt:    #0D0060;
-  --sz-text:        #F0EFF8;
+  --sz-bg:          #0A0075;             /* ana koyu lacivert — dark mod arka planı */
+  --sz-card:        #1e293b;
+  --sz-card-alt:    #243044;
+  --sz-text:        #f8fafc;             /* sabitlendi */
   --sz-muted:       #C4B3F5;
   --sz-border:      rgba(196, 179, 245, 0.14);
-  --sz-nav-bg:      rgba(3, 0, 34, 0.95);
-  --sz-input-bg:    #0A0050;
+  --sz-nav-bg:      rgba(15, 23, 42, 0.95);
+  --sz-input-bg:    #1e293b;
 
-  /* In dark mode lavender becomes primary for contrast */
-  --sz-primary:     #C4B3F5;
+  --sz-primary:     #C4B3F5;             /* lavanta primary dark modda */
   --sz-primary-h:   #D4C8F8;
   --sz-primary-rgb: 196, 179, 245;
   --sz-secondary:   #0A0075;
@@ -68,14 +69,14 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
-  background: var(--sz-bg-desktop);
+  /* background body'den kaldırıldı — sadece .sz-app-shell içinde tanımlanıyor */
+  margin: 0;
   color: var(--sz-text);
   font-family: 'Inter', -apple-system, 'SF Pro Display', 'Segoe UI', sans-serif;
   font-size: 15px;
   line-height: 1.6;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-  margin: 0;
-  transition: background var(--sz-transition), color var(--sz-transition);
+  transition: color var(--sz-transition);
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -88,18 +89,23 @@ h1,h2,h3,h4,h5,h6 {
 a { color: var(--sz-primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* ── Mobile App Shell ── */
+/* ── Mobile App Shell — dikey çerçeve, tüm renkler içinde hapsolur ── */
 .sz-app-shell {
   max-width: 480px;
+  width: 100%;
+  min-height: 100dvh;
   margin: 0 auto;
-  min-height: 100vh;
-  background: var(--sz-bg);
-  position: relative;   /* splash position:absolute buna göre konumlanır */
-  overflow: hidden;     /* hiçbir renk/içerik bu kutunun dışına taşmaz   */
+  background: var(--sz-bg); /* #F5F5EB light / #0A0075 dark — SADECE burada */
+  position: relative;       /* splash position:absolute buna göre konumlanır */
+  overflow: hidden;         /* hiçbir renk dışarıya taşmaz                   */
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 0 1px rgba(10,0,117,0.06), var(--sz-shadow-lg);
+  box-shadow: 0 0 40px rgba(10,0,117,0.18), 0 0 0 1px rgba(10,0,117,0.08);
   transition: background var(--sz-transition);
+}
+/* Desktop: oval köşeler — telefon çerçevesi görünümü */
+@media (min-width: 500px) {
+  .sz-app-shell { border-radius: 36px; }
 }
 
 /* ── Top Header ── */
@@ -152,18 +158,20 @@ a:hover { text-decoration: underline; }
   display: block;
 }
 [data-theme='dark'] .sz-brand-logo {
-  filter: brightness(0) invert(1); /* dark: logo → beyaz */
+  /* Logo lavanta renkli — invert rengi bozar; parlaklık+glow ile görünür yap */
+  filter: brightness(1.2) drop-shadow(0 0 3px rgba(196, 179, 245, 0.4));
 }
 
 .sz-brand-wordmark {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 900;
-  letter-spacing: -0.06em;
-  color: var(--sz-primary); /* light=#0A0075 navy, dark=#C4B3F5 lavender */
+  letter-spacing: -0.08em; /* startup hissi — daha sıkı aralık */
+  color: var(--sz-primary);
   line-height: 1;
 }
+/* Büyük S ve Z vurgulu — lavanta rengi */
 .sz-brand-s,
-.sz-brand-z { color: var(--sz-accent); } /* light=#5C3FE8, dark=#A48FEF */
+.sz-brand-z { color: var(--sz-secondary); }
 
 /* Onboarding guide — logo on first slide (inverted for dark card background) */
 .sz-guide-logo-img {
@@ -327,15 +335,26 @@ a:hover { text-decoration: underline; }
 
 /* Glassmorphism variant */
 .sz-glass {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(20px) saturate(1.6);
-  -webkit-backdrop-filter: blur(20px) saturate(1.6);
-  border: 1px solid rgba(196, 179, 245, 0.35);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border: 1px solid rgba(196, 179, 245, 0.4);
   border-radius: var(--sz-radius);
+  box-shadow: 0 4px 20px rgba(10,0,117,0.08);
 }
 [data-theme='dark'] .sz-glass {
-  background: rgba(10, 0, 117, 0.35);
-  border: 1px solid rgba(196, 179, 245, 0.18);
+  background: rgba(10, 0, 117, 0.4);
+  border: 1px solid rgba(196, 179, 245, 0.2);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* ── Buton tap animasyonu (Framer Motion yerine CSS active state) ── */
+.btn-sz-primary:active,
+.btn-sz-secondary:active,
+.btn-sz-ghost:active,
+.btn-sz-outline:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
 }
 
 /* ── Buttons ── */
@@ -1185,18 +1204,16 @@ a:hover { text-decoration: underline; }
 }
 
 /* ════════════════════════════════════════════
-   Splash Screen — mobil çerçeve içinde, taşmaz
+   Splash Screen — dikey çerçeve içinde, taşmaz
 ════════════════════════════════════════════ */
 .sz-splash {
   position: absolute;
   inset: 0;
   z-index: 10;
-  background: #0f172a;  /* lacivert — her iki temada da aynı */
+  background: #F5F5EB; /* krem/beyaz — light mod arka planıyla aynı */
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
   transition: opacity 0.5s ease;
   animation: sz-fade-in 0.3s ease;
 }
@@ -1204,13 +1221,13 @@ a:hover { text-decoration: underline; }
   opacity: 0;
   pointer-events: none;
 }
-/* Logo: dark arka plan üstünde her zaman beyaz */
 .sz-splash-logo-img {
-  width: 62%;
-  max-width: 260px;
+  width: 65%;
+  max-width: 270px;
   height: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  /* Krem arka plan üstünde logo — lacivert shadow ile derinlik */
+  filter: drop-shadow(0 4px 12px rgba(10, 0, 117, 0.18));
   animation: sz-scale-in 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 

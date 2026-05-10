@@ -3,9 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
-
-/* Logo public/ klasöründen sunuluyor — webpack bundle bağımsız, her zaman çalışır */
-const LOGO_SRC = process.env.PUBLIC_URL + '/StudyZone.png';
+import Logo from '../assets/StudyZone.png';
 
 const TRFlag = () => (
   <svg width="16" height="11" viewBox="0 0 16 11" style={{ display: 'inline-block', verticalAlign: 'middle', borderRadius: 2, flexShrink: 0 }}>
@@ -55,8 +53,13 @@ export default function TopHeader() {
         <Link to="/" className="sz-top-brand" aria-label="StudyZone Home">
           {/* Wrapper pill — logoyu her iki temada görünür yapar */}
           <span className="sz-brand-logo-wrap">
-            <img src={LOGO_SRC} alt="" className="sz-brand-logo" aria-hidden="true"
-              style={{ width: 'auto', height: '22px' }} />
+            <img
+              src={Logo}
+              alt=""
+              className="sz-brand-logo"
+              aria-hidden="true"
+              style={{ width: 'auto', height: '22px' }}
+            />
           </span>
           <span className="sz-brand-wordmark">
             <span className="sz-brand-s">S</span>tudy<span className="sz-brand-z">Z</span>one

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Logo from '../assets/StudyZone.png';
 
-/* Logo public/ klasöründen sunuluyor — import hatası riski sıfır */
-const LOGO_SRC = process.env.PUBLIC_URL + '/StudyZone.png';
-
+/* Splash: 2.1 s — krem (#F5F5EB) arka plan, logo büyük ve ortalı */
 export default function SplashScreen({ onDone }) {
   const [exiting, setExiting] = useState(false);
 
@@ -13,12 +12,14 @@ export default function SplashScreen({ onDone }) {
   }, [onDone]);
 
   return (
-    <div className={`sz-splash${exiting ? ' sz-splash-exit' : ''}`}
-      aria-label="StudyZone yükleniyor">
+    <div
+      className={`sz-splash${exiting ? ' sz-splash-exit' : ''}`}
+      aria-label="StudyZone yükleniyor"
+    >
       <img
-        src={LOGO_SRC}
+        src={Logo}
         alt="StudyZone"
-        style={{ width: 'auto', height: '40px', maxWidth: '62%', filter: 'brightness(0) invert(1)' }}
+        className="sz-splash-logo-img"
       />
     </div>
   );
