@@ -29,9 +29,6 @@ function TagList({ items, accent }) {
   );
 }
 
-/* eslint-disable-next-line no-unused-vars */
-function _TagRowUnused({ label, items, accent }) { return null; }
-
 /* ─────────────────────────────────────────
    Course picker (edit) — fetches /api/courses
 ───────────────────────────────────────── */

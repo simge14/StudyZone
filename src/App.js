@@ -17,7 +17,6 @@ import Learnership from './components/Learnership';
 import OnboardingGuide from './components/OnboardingGuide';
 import SplashScreen    from './components/SplashScreen';
 
-/* Sayfa geçiş animasyonu — opacity fade 0→1 */
 const pageVariants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.35, ease: 'easeOut' } },
@@ -29,7 +28,6 @@ function PrivateRoute({ children }) {
   return user ? children : <Navigate to="/login" replace />;
 }
 
-/* Global server-offline banner */
 function ServerBanner() {
   const [offline, setOffline] = useState(false);
 
