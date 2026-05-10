@@ -186,7 +186,7 @@ export default function LocationGuide() {
 
       {/* BR-31 & BR-33 note */}
       <div style={{ marginTop: '2.5rem', padding: '0.75rem', borderTop: '1px solid var(--sz-border)', fontSize: '0.72rem', color: 'var(--sz-muted)', textAlign: 'center', fontWeight: 600, letterSpacing: '0.04em' }}>
-        ANATOLIAN SIDE ONLY · NO REVIEWS & RATINGS
+        {t('locations.footerNote')}
       </div>
     </div>
   );

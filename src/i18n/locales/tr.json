@@ -120,7 +120,11 @@
     "verified": "Doğrulanmış Öğrenci",
     "verifiedBadge": "@isik.edu.tr — Doğrulanmış",
     "bio": "Hakkımda",
-    "bioPlaceholder": "Kendinizi kısaca tanıtın..."
+    "bioPlaceholder": "Kendinizi kısaca tanıtın...",
+    "studyBuddyStatus": "Study Buddy Durumu",
+    "waitingForMatch": "Eşleşme Bekleniyor",
+    "matchingDesc": "Sistem sizi uygun bir arkadaşla eşleştirecek.",
+    "topicOfChoice": "Tercih Konusu"
   },
   "learnership": {
     "pageTitle": "Study Buddy",
@@ -184,7 +188,8 @@
     "noRequests": "Henüz barter talebi yok.",
     "filter": "Derse göre filtrele",
     "allCourses": "Tüm Dersler",
-    "noMoney": "Para · Puan · Kredi yok — Sadece bilgi takası"
+    "noMoney": "Para · Puan · Kredi yok — Sadece bilgi takası",
+    "rateBtn": "★ Puan Ver"
   },
   "pomodoro": {
     "title": "Pomodoro Sayacı",
@@ -207,6 +212,7 @@
     "wifi": "Wi-Fi",
     "sockets": "Priz",
     "hours": "Saatler",
+    "footerNote": "YALNIZCA ANADOLU YAKASI · YORUM & PUAN YOK",
     "types": {
       "cafe": "Kafe",
       "library": "Kütüphane",

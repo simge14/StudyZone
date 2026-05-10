@@ -169,7 +169,7 @@ function BarterCard({ barter, isOwn, onComplete, onRate }) {
             <button className="btn-sz-outline"
               style={{ fontSize:'0.75rem', padding:'0.22rem 0.6rem', minHeight:32 }}
               onClick={() => onRate(barter)}>
-              ★ Rate Partner
+              {t('barter.rateBtn')}
             </button>
           )}
         </div>
