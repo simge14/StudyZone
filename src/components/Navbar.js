@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
+import api from '../api/axios';
 import Logo from '../assets/StudyZone.png';
 
 const TRFlag = () => (
@@ -40,7 +41,7 @@ export default function TopHeader() {
   const isEN = i18n.language === 'en';
 
   const handleLogout = async () => {
-    await fetch('/api/auth/logout', { method: 'POST' }).catch(() => {});
+    await api.post('/api/auth/logout').catch(() => {});
     logout();
     setShowLogout(false);
     navigate('/', { replace: true });

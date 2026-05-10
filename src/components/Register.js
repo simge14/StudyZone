@@ -241,11 +241,6 @@ export default function Register() {
   const wantOk        = form.wantToLearn.length > 0;
   const learnOk       = form.learnership !== '';
 
-  /* BR-01 + required field (BR-02) pre-flight checks (used in inline validation above) */
-  // eslint-disable-next-line no-unused-vars
-  const canSubmit = form.name.trim() && emailValid && form.password.length >= 8 &&
-    pwMatch && interestsOk && goodAtOk && wantOk && learnOk;
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
