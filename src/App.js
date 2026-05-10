@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -15,6 +16,13 @@ import LocationGuide from './components/LocationGuide';
 import Learnership from './components/Learnership';
 import OnboardingGuide from './components/OnboardingGuide';
 import SplashScreen    from './components/SplashScreen';
+
+/* Sayfa geçiş animasyonu — opacity fade 0→1 */
+const pageVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.35, ease: 'easeOut' } },
+  exit:    { opacity: 0, transition: { duration: 0.2,  ease: 'easeIn'  } },
+};
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
@@ -44,12 +52,40 @@ function ServerBanner() {
   );
 }
 
+/* AnimatePresence'ın location key'e ihtiyacı var — Route'ların üstüne alınır */
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        variants={pageVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}
+      >
+        <Routes location={location}>
+          <Route path="/"          element={<Home />} />
+          <Route path="/login"     element={<Login />} />
+          <Route path="/register"  element={<Register />} />
+          <Route path="/locations" element={<LocationGuide />} />
+          <Route path="/profile"      element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="/barter"       element={<PrivateRoute><BarterDashboard /></PrivateRoute>} />
+          <Route path="/learnership"  element={<PrivateRoute><Learnership /></PrivateRoute>} />
+          <Route path="/pomodoro"     element={<PrivateRoute><Pomodoro /></PrivateRoute>} />
+          <Route path="*"          element={<Navigate to="/" replace />} />
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 function AppShell() {
   const [splashDone, setSplashDone] = useState(false);
 
   return (
     <div className="sz-app-shell">
-      {/* Splash renders inside the mobile frame — not full-screen */}
       {!splashDone ? (
         <SplashScreen onDone={() => setSplashDone(true)} />
       ) : (
@@ -58,17 +94,7 @@ function AppShell() {
           <ServerBanner />
           <div className="sz-scroll-area">
             <ErrorBoundary>
-              <Routes>
-                <Route path="/"          element={<Home />} />
-                <Route path="/login"     element={<Login />} />
-                <Route path="/register"  element={<Register />} />
-                <Route path="/locations" element={<LocationGuide />} />
-                <Route path="/profile"      element={<PrivateRoute><Profile /></PrivateRoute>} />
-                <Route path="/barter"       element={<PrivateRoute><BarterDashboard /></PrivateRoute>} />
-                <Route path="/learnership"  element={<PrivateRoute><Learnership /></PrivateRoute>} />
-                <Route path="/pomodoro"     element={<PrivateRoute><Pomodoro /></PrivateRoute>} />
-                <Route path="*"          element={<Navigate to="/" replace />} />
-              </Routes>
+              <AnimatedRoutes />
             </ErrorBoundary>
           </div>
           <BottomNav />

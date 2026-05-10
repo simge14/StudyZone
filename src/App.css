@@ -45,14 +45,14 @@
 
 /* ── Dark tokens ── */
 [data-theme='dark'] {
-  --sz-bg:          #0A0075;             /* ana koyu lacivert — dark mod arka planı */
-  --sz-card:        #1e293b;
-  --sz-card-alt:    #243044;
-  --sz-text:        #f8fafc;             /* sabitlendi */
+  --sz-bg:          #050038;             /* kullanıcı paleti: en koyu lacivert */
+  --sz-card:        #0A0050;             /* navy kart — antrasit gri yok */
+  --sz-card-alt:    #0D0060;
+  --sz-text:        #F0EFF8;
   --sz-muted:       #C4B3F5;
   --sz-border:      rgba(196, 179, 245, 0.14);
-  --sz-nav-bg:      rgba(15, 23, 42, 0.95);
-  --sz-input-bg:    #1e293b;
+  --sz-nav-bg:      rgba(5, 0, 56, 0.96);
+  --sz-input-bg:    #0A0050;
 
   --sz-primary:     #C4B3F5;             /* lavanta primary dark modda */
   --sz-primary-h:   #D4C8F8;
@@ -69,7 +69,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
-  /* background body'den kaldırıldı — sadece .sz-app-shell içinde tanımlanıyor */
+  background: #e2e2e2; /* nötr açık gri — uygulama kasası dışındaki tarayıcı alanı */
   margin: 0;
   color: var(--sz-text);
   font-family: 'Inter', -apple-system, 'SF Pro Display', 'Segoe UI', sans-serif;
@@ -89,23 +89,19 @@ h1,h2,h3,h4,h5,h6 {
 a { color: var(--sz-primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* ── Mobile App Shell — dikey çerçeve, tüm renkler içinde hapsolur ── */
+/* ── Mobile App Shell — iPhone 15 Pro (430px) kasası ── */
 .sz-app-shell {
-  max-width: 480px;
+  max-width: 430px;
   width: 100%;
   min-height: 100dvh;
   margin: 0 auto;
-  background: var(--sz-bg); /* #F5F5EB light / #0A0075 dark — SADECE burada */
-  position: relative;       /* splash position:absolute buna göre konumlanır */
-  overflow: hidden;         /* hiçbir renk dışarıya taşmaz                   */
+  background: var(--sz-bg);
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 40px rgba(10,0,117,0.18), 0 0 0 1px rgba(10,0,117,0.08);
+  box-shadow: 0 0 60px rgba(0,0,0,0.28), 0 0 0 1px rgba(10,0,117,0.15);
   transition: background var(--sz-transition);
-}
-/* Desktop: oval köşeler — telefon çerçevesi görünümü */
-@media (min-width: 500px) {
-  .sz-app-shell { border-radius: 36px; }
 }
 
 /* ── Top Header ── */
@@ -334,6 +330,7 @@ a:hover { text-decoration: underline; }
 }
 
 /* Glassmorphism variant */
+/* Light glassmorphism */
 .sz-glass {
   background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(20px) saturate(1.8);
@@ -342,20 +339,102 @@ a:hover { text-decoration: underline; }
   border-radius: var(--sz-radius);
   box-shadow: 0 4px 20px rgba(10,0,117,0.08);
 }
+
+/* Dark: lacivert cam + Apple tarzı ışık yansıması */
 [data-theme='dark'] .sz-glass {
-  background: rgba(10, 0, 117, 0.4);
-  border: 1px solid rgba(196, 179, 245, 0.2);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  background: rgba(10, 0, 117, 0.55);
+  border-top: 1px solid rgba(255, 255, 255, 0.18); /* ince beyaz vurgu çizgisi */
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12);
+  position: relative;
+  overflow: hidden;
+}
+/* Reflective shimmer — radial glow hareket ediyor */
+[data-theme='dark'] .sz-glass::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: -60%;
+  width: 50%;
+  height: 180%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 100%
+  );
+  animation: sz-glass-shimmer 5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes sz-glass-shimmer {
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(400%);  }
+  100% { transform: translateX(400%);  }
 }
 
-/* ── Buton tap animasyonu (Framer Motion yerine CSS active state) ── */
+/* ════════════════════════════════════════════
+   Apple-style Glassmorphism Kart (sz-glass-card)
+   Dashboard kartlarına uygula
+════════════════════════════════════════════ */
+.sz-glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px) saturate(1.6);
+  -webkit-backdrop-filter: blur(12px) saturate(1.6);
+  border-top:    1px solid rgba(255, 255, 255, 0.8); /* pırıltılı üst vurgu */
+  border-left:   1px solid rgba(255, 255, 255, 0.3);
+  border-right:  1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;                               /* rounded-2xl eşdeğeri */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Orbital dairesel glow — CSS animation (Framer Motion bileşen gereksiz) */
+.sz-glass-card::after {
+  content: '';
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.30) 0%, transparent 70%);
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  animation: sz-orbital-glow 7s ease-in-out infinite;
+}
+@keyframes sz-orbital-glow {
+  0%   { transform: translate(-50%,-50%) translate(  0px,   0px); }
+  25%  { transform: translate(-50%,-50%) translate( 55px, -25px); }
+  50%  { transform: translate(-50%,-50%) translate(  0px, -50px); }
+  75%  { transform: translate(-50%,-50%) translate(-55px, -25px); }
+  100% { transform: translate(-50%,-50%) translate(  0px,   0px); }
+}
+
+/* Tüm karları shadow-lg + rounded-2xl */
+.sz-card {
+  border-radius: 20px !important;
+  box-shadow: 0 10px 40px rgba(10,0,117,0.12), 0 2px 8px rgba(10,0,117,0.06) !important;
+}
+
+/* ── Buton mikro-interaksiyonlar — whileHover + whileTap CSS karşılığı ── */
+.btn-sz-primary,
+.btn-sz-secondary,
+.btn-sz-ghost,
+.btn-sz-outline {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.btn-sz-primary:hover,
+.btn-sz-secondary:hover { transform: scale(1.02); }
 .btn-sz-primary:active,
 .btn-sz-secondary:active,
 .btn-sz-ghost:active,
-.btn-sz-outline:active {
-  transform: scale(0.95);
-  transition: transform 0.1s ease;
-}
+.btn-sz-outline:active   { transform: scale(0.95); }
 
 /* ── Buttons ── */
 .btn-sz-primary {
@@ -1202,6 +1281,72 @@ a:hover { text-decoration: underline; }
 .sz-scroll-area::-webkit-scrollbar-thumb:hover {
   background: rgba(var(--sz-primary-rgb), 0.4);
 }
+
+/* ════════════════════════════════════════════
+   Youthful Motion Layer
+   Renk / tasarım değişmez — sadece hareket,
+   derinlik ve enerji. Göz yormaz, Z kuşağı
+   dinamikliği katar.
+════════════════════════════════════════════ */
+
+/* 1. Dashboard metric kartları — antifaz "nefes alma" (4 s) */
+.sz-dash-metrics .sz-dash-metric              { animation: sz-breathe 4s ease-in-out infinite; }
+.sz-dash-metrics .sz-dash-metric:last-child   { animation-delay: 2s; }
+@keyframes sz-breathe {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-3px); }
+}
+
+/* 2. Quick tool kartları — enerjik spring hover */
+.sz-dash-tool {
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.28s ease;
+}
+.sz-dash-tool:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 18px 44px rgba(10,0,117,0.48),
+              0 0 30px rgba(196,179,245,0.28);
+  text-decoration: none;
+}
+
+/* 3. Dashboard avatar — dönen degrade canlılık */
+.sz-dash-avatar {
+  background: linear-gradient(135deg, var(--sz-primary) 0%, var(--sz-accent) 50%, var(--sz-secondary) 100%);
+  background-size: 300% 300%;
+  animation: sz-avatar-spin 5s ease-in-out infinite;
+}
+@keyframes sz-avatar-spin {
+  0%, 100% { background-position:   0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+/* 4. Bottom nav aktif çizgi — genişlik pulse */
+.sz-nav-item.active::before { animation: sz-bar-pulse 2.5s ease-in-out infinite; }
+@keyframes sz-bar-pulse {
+  0%, 100% { width: 20px; }
+  50%       { width: 30px; }
+}
+
+/* 5. Aktif nokta — antifaz scale pop */
+.sz-nav-item.active::after { animation: sz-dot-pop 2.5s ease-in-out infinite 1.25s; }
+@keyframes sz-dot-pop {
+  0%, 100% { transform: translateX(-50%) scale(1);   opacity: 0.6; }
+  50%       { transform: translateX(-50%) scale(1.8); opacity: 1;   }
+}
+
+/* 6. Primary buton — hover lavanta aura */
+.btn-sz-primary:hover {
+  box-shadow: 0 6px 24px rgba(var(--sz-primary-rgb), 0.45),
+              0 0 32px rgba(196,179,245,0.22);
+}
+
+/* 7. Stat box & feature kart hover lift */
+.sz-stat-box:hover,
+.sz-feature-card:hover { transform: translateY(-4px); box-shadow: var(--sz-shadow-md); }
+
+/* 8. Barter / location kartları — hafif lift */
+.sz-barter-card:hover,
+.sz-location-card:hover { transform: translateY(-2px); box-shadow: var(--sz-shadow-md); }
 
 /* ════════════════════════════════════════════
    Splash Screen — dikey çerçeve içinde, taşmaz

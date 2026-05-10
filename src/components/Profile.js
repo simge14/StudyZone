@@ -219,7 +219,7 @@ function LearnershipCard() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
         <span style={{ fontSize: '1.2rem' }}>🤝</span>
-        <h3 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 700 }}>Study Buddy Durumu</h3>
+        <h3 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 700 }}>Study Buddy Status</h3>
         <span style={{ marginLeft: 'auto' }}
           className={`sz-pill ${data.matched ? 'sz-pill-active' : 'sz-pill-learn'}`}>
           {data.matched ? '● Eşleşildi' : '○ Bekleniyor'}
@@ -258,7 +258,7 @@ function LearnershipCard() {
         <div>
           <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.85rem', flexWrap: 'wrap' }}>
             <div style={{ flex: 1, minWidth: 120 }}>
-              <span className="sz-label">Tercih Konusu</span>
+              <span className="sz-label">Topic of Choice</span>
               <p style={{ margin: '0.2rem 0 0', fontSize: '0.9rem' }}>{safe(data.subject, '—')}</p>
             </div>
             {data.locationPreference && (
@@ -276,10 +276,10 @@ function LearnershipCard() {
               display: 'inline-block' }}>⏳</span>
             <div>
               <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 600, color: 'var(--sz-accent)' }}>
-                Eşleşme Bekleniyor
+                Waiting for Match
               </p>
               <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--sz-muted)' }}>
-                Sistem sizi uygun bir arkadaşla eşleştirecek.
+                The system will match you with a suitable partner.
               </p>
             </div>
           </div>
